@@ -28,7 +28,11 @@ def new(request):
         form = NewUserForm(request.POST)
 
         if form.is_valid():
-            newUser = Users(name=form.cleaned_data['name'])
+            newUser = Users(name=form.cleaned_data['name'],
+                            email=form.cleaned_data['email'],
+                            contact=form.cleaned_data['contact'],
+                            matric_number=form.cleaned_data['matric_number']
+                            )
             newUser.save();
             context['success_message'] = 'New user added'
 
