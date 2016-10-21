@@ -1,0 +1,16 @@
+{% extends "../../templates/base.html" %}
+
+{% block title %}New User{% endblock %}
+
+{% block content %}
+    <h1>Add New User</h1>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if success_message %}<p><strong>{{ success_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'users:new' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add" />
+    </form>
+{% endblock %}
