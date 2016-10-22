@@ -144,33 +144,35 @@ function csrfSafeMethod(method) {
 
 // members page
 function deleteMember(e) {
-    $.ajax({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    var result = confirm("Are you sure?");
+    if (result) {
+        $.ajax({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            url: '/users/delete/',
+            type: 'POST',
+            data: {user_id: $(e).data("id") },
+            dataType: 'json',
+
+            // handle a successful response
+            success : function(json) {
+                if (json["isDeleted"]) {
+                    $("#member-" + $(e).data("id")).remove();
+
+                    console.log("success"); // another sanity check
+                } else {
+                    console.log("failed in deleting");
+                }
+            },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
-        },
-        url: '/users/delete/',
-        type: 'POST',
-        data: {user_id: $(e).data("id") },
-        dataType: 'json',
-
-        // handle a successful response
-        success : function(json) {
-            if (json["isDeleted"]) {
-                $("#member-" + $(e).data("id")).remove();
-
-                console.log("success"); // another sanity check
-            } else {
-                console.log("failed in deleting");
-            }
-        },
-
-        // handle a non-successful response
-        error : function(xhr,errmsg,err) {
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-    });
-
+        });
+    }
 }
 
