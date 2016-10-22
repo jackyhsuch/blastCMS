@@ -1,9 +1,9 @@
-{% extends "../../templates/base.html" %}
+{% extends "base.html" %}
 
-{% block title %}New User{% endblock %}
+{% block title %}New Member{% endblock %}
 
 {% block content %}
-    <h1>Add New User</h1>
+    <h1>Add New Member</h1>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% if success_message %}<p><strong>{{ success_message }}</strong></p>{% endif %}
