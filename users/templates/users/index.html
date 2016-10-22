@@ -21,16 +21,16 @@
                 <tbody>
                     {% if user_list %}
                         {% for user in user_list %}
-                            <tr>
+                            <tr id="member-{{ user.id }}">
                                 <td>{{ user.id }}</td>
                                 <td><a href="{% url 'users:show' user.id %}">{{ user.name }}</a></td>
-                                <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                <td>12000.00$ </td>
-                                <td><span class="label label-info label-mini">Due</span></td>
+                                <td class="hidden-phone">{{ user.email }}</td>
+                                <td>{{ user.contact }}</td>
+                                <td>{{ user.matric_number }}</td>
                                 <td>
                                     <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                                     <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                    <button class="btn btn-danger btn-xs delete-member"><i class="fa fa-trash-o "></i></button>
+                                    <button class="btn btn-danger btn-xs" data-id="{{ user.id }}" onclick="deleteMember(this);"><i class="fa fa-trash-o "></i></button>
                                 </td>
                             </tr>
                         {% endfor %}

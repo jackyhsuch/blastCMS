@@ -21,7 +21,7 @@
         <link href="{{ STATICFILES_DIRS }}/static/css/style.css" rel="stylesheet">
         <link href="{{ STATICFILES_DIRS }}/static/css/style-responsive.css" rel="stylesheet">
 
-        <script src="{{ STATICFILES_DIRS }}/static/js/chart-master/Chart.js"></script>
+        <!-- <script src="{{ STATICFILES_DIRS }}/static/js/chart-master/Chart.js"></script> -->
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -182,29 +182,7 @@
 
         <!--script for this page-->
         <script src="{{ STATICFILES_DIRS }}/static/js/sparkline-chart.js"></script>    
-        <script src="{{ STATICFILES_DIRS }}/static/js/zabuto_calendar.js"></script>    
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-            var unique_id = $.gritter.add({
-                // (string | mandatory) the heading of the notification
-                title: 'Welcome to Dashgum!',
-                // (string | mandatory) the text inside the notification
-                text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
-                // (string | optional) the image to display on the left
-                // image: '{{ STATICFILES_DIRS }}/static/img/ui-sam.jpg',
-                // (bool | optional) if you want it to fade out on its own or just sit there
-                sticky: true,
-                // (int | optional) the time you want it to be alive for before fading out
-                time: '',
-                // (string | optional) the class name you want to apply to that specific message
-                class_name: 'my-sticky-class'
-            });
-
-            return false;
-            });
-        </script>
-
+        <script src="{{ STATICFILES_DIRS }}/static/js/zabuto_calendar.js"></script>
         
     </body>
 </html>
