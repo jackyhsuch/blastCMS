@@ -5,10 +5,14 @@ from .models import Users
 from .forms import NewUserForm
 
 import json
+import openpyxl
+import easygui
+import tkinter
+from tkinter import *
 
 # Create your views here.
 def index(request):
-    user_list = Users.objects.order_by('id')[:5]
+    user_list = Users.objects.order_by('id')
     context = {
         'user_list': user_list,
     }
@@ -65,3 +69,90 @@ def delete(request):
             json.dumps({"nothing to see": "this isn't happening"}),
             content_type="application/json"
         )
+
+
+# download users
+def download(request):
+    if request.method == 'POST':
+
+        wb = openpyxl.Workbook()
+        ws = wb.active
+
+        # get all members
+        memberObjects = Users.objects.all().values()
+
+        colToDelete = []
+
+        # fill up headings
+        for count, key in enumerate(memberObjects[0]):
+            if (type(memberObjects[0][key]).__name__ != 'datetime'):
+                ws.cell(row=1, column=count+2, value=key.upper())
+            else:
+                colToDelete.append(count)
+
+        # fill up datas
+        for count1, memberObject in enumerate(memberObjects):
+            for count2, key in enumerate(memberObject):
+                if (type(memberObject[key]).__name__ != 'datetime'):
+                    ws.cell(row=count1+2, column=count2+2, value=memberObject[key])
+
+                    # ws.write(count1+1, count2, memberObject[key], style1)
+
+        # fill up number colum
+        for count in range(len(memberObjects)):
+            ws.cell(row=count+2, column=1, value=count+1)
+
+        # delete empty columns for created_at and updated_at
+        for count, col in enumerate(colToDelete):
+            delete_column(ws, col+2-count)
+
+        # get file path and save
+        file_path = get_file_path()
+
+        if not file_path:
+            return HttpResponse(
+                json.dumps({"downloaded": False}),
+                content_type="application/json"
+            )
+        else:
+            wb.save(file_path)
+            return HttpResponse(
+                    json.dumps({"downloaded": True}),
+                    content_type="application/json"
+                )
+    else:
+        return render(request, 'users/download.html')
+
+
+def delete_column(ws, delete_column):
+    if isinstance(delete_column, str):
+        delete_column = openpyxl.cell.column_index_from_string(delete_column)
+    assert delete_column >= 1, "Column numbers must be 1 or greater"
+
+    for column in range(delete_column, ws.max_column + 1):
+        for row in range(1, ws.max_row + 1):
+            ws.cell(row=row, column=column).value = \
+                    ws.cell(row=row, column=column+1).value
+
+
+def get_file_path():
+    root = tkinter.Tk()
+    root.attributes('-topmost', True)
+    root.withdraw()
+
+    options = {}
+    options['defaultextension'] = '.xlsx'
+    options['initialfile'] = 'members.xlsx'
+
+    file_path = tkinter.filedialog.asksaveasfilename(**options)
+
+    root.destroy()
+
+    return file_path
+
+
+
+
+
+
+    

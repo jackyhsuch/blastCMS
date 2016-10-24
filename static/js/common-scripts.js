@@ -176,3 +176,28 @@ function deleteMember(e) {
     }
 }
 
+// members - download
+function downloadMember(e) {
+    $.ajax({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            url: '/users/download/',
+            type: 'POST',
+            data: {},
+            dataType: 'json',
+
+            // handle a successful response
+            success : function(json) {
+               console.log("downloaded");
+            },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+}
+

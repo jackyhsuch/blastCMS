@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^new/$', views.new, name='new'),
     # /users/delete/
     url(r'^delete/$', views.delete, name='delete'),
+    # /users/download/
+    url(r'^download/$', views.download, name='download'),
 ]
