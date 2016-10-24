@@ -6,7 +6,6 @@ from .forms import NewUserForm
 
 import json
 import openpyxl
-import easygui
 import tkinter
 from tkinter import *
 
