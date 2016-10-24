@@ -7,7 +7,7 @@ from .forms import NewUserForm
 import json
 import openpyxl
 import tkinter
-from tkinter import *
+from tkinter import filedialog
 
 # Create your views here.
 def index(request):
