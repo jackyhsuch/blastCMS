@@ -201,3 +201,15 @@ function downloadMember(e) {
         });
 }
 
+
+
+function editMember(e) {
+
+     $(".member-"+$(e).data("id")+"-row").each(function(){
+        var text = $(this).text();
+        $(this).replaceWith("<td><input type='text' value='"+text+"'></td>");
+     });
+
+
+}   
+
