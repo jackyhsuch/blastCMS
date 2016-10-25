@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from .models import Users
 from .forms import NewUserForm
 
+from datetime import datetime
+
+import pytz
 import json
 import openpyxl
 import tkinter
@@ -51,16 +54,15 @@ def update(request):
     if request.method == 'POST':
         dataArray = json.loads(request.POST['dataArray'])
         user_id = request.POST['user_id']
-        print(dataArray)
-        print(user_id)
 
         Users.objects.filter(id=user_id).update(
                 name = dataArray[0],
                 email = dataArray[1],
                 contact = dataArray[2],
-                matric_number = dataArray[3]
+                matric_number = dataArray[3],
+                updated_at = datetime.now(pytz.timezone('Asia/Singapore'))
             )
-        
+
         return HttpResponse(
                 json.dumps({"isUpdated": True}),
                 content_type="application/json"
