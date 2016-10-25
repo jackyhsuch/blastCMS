@@ -46,6 +46,31 @@ def new(request):
 
     return render(request, 'users/new.html', context)
 
+# update user
+def update(request):
+    if request.method == 'POST':
+        dataArray = json.loads(request.POST['dataArray'])
+        user_id = request.POST['user_id']
+        print(dataArray)
+        print(user_id)
+
+        Users.objects.filter(id=user_id).update(
+                name = dataArray[0],
+                email = dataArray[1],
+                contact = dataArray[2],
+                matric_number = dataArray[3]
+            )
+        
+        return HttpResponse(
+                json.dumps({"isUpdated": True}),
+                content_type="application/json"
+            )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
+
 
 # delete user
 def delete(request):

@@ -23,12 +23,12 @@
                         {% for user in user_list %}
                             <tr id="member-{{ user.id }}">
                                 <td>{{ user.id }}</td>
-                                <td class="member-{{ user.id }}-row"><a href="{% url 'users:show' user.id %}">{{ user.name }}</a></td>
+                                <td class="member-{{ user.id }}-row">{{ user.name }}</td>
                                 <td class="member-{{ user.id }}-row">{{ user.email }}</td>
                                 <td class="member-{{ user.id }}-row">{{ user.contact }}</td>
                                 <td class="member-{{ user.id }}-row">{{ user.matric_number }}</td>
                                 <td>
-                                    <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                    <button class="btn btn-success btn-xs" data-id="{{ user.id }}" onclick="submitMember(this);"><i class="fa fa-check"></i></button>
                                     <button class="btn btn-primary btn-xs" data-id="{{ user.id }}" onclick="editMember(this);"><i class="fa fa-pencil"></i></button>
                                     <button class="btn btn-danger btn-xs" data-id="{{ user.id }}" onclick="deleteMember(this);"><i class="fa fa-trash-o "></i></button>
                                 </td>

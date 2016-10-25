@@ -204,12 +204,52 @@ function downloadMember(e) {
 
 
 function editMember(e) {
+    var id = $(e).data("id");
 
-     $(".member-"+$(e).data("id")+"-row").each(function(){
+    $(".member-"+id+"-row").each(function(){
         var text = $(this).text();
-        $(this).replaceWith("<td><input type='text' value='"+text+"'></td>");
-     });
+        $(this).replaceWith("<td><input class='input-"+id+"' type='text' value='"+text+"'></td>");
+    });
+}
 
+function submitMember(e) {
+    var id = $(e).data("id");
 
-}   
+    var dataArray = [];
+
+    $(".input-"+id).each(function() {
+        dataArray.push($(this).val());
+    })
+
+    var dataToPass = {
+        'user_id': id,
+        'dataArray': JSON.stringify(dataArray)
+    }
+
+    $.ajax({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            url: '/users/update/',
+            type: 'POST',
+            data: dataToPass,
+            dataType: 'json',
+
+            // handle a successful response
+            success : function(json) {
+               console.log("updated");
+               $(".input-"+id).each(function(){
+                    var value = $(this).val();
+                    $(this).replaceWith(value);
+               });
+            },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+}
 
