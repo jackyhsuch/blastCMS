@@ -205,7 +205,8 @@ function downloadMember(e) {
 
 function editMember(e) {
     var id = $(e).data("id");
-
+    $("#pencilbutton-"+id).hide();
+    $("#checkbutton-"+id).show();
     $(".member-"+id+"-row").each(function(){
         var text = $(this).text();
         $(this).replaceWith("<input class='input-"+id+"' type='text' value='"+text+"'>");
@@ -214,7 +215,8 @@ function editMember(e) {
 
 function submitMember(e) {
     var id = $(e).data("id");
-
+    $("#pencilbutton-"+id).show();
+    $("#checkbutton-"+id).hide();
     var dataArray = [];
 
     $(".input-"+id).each(function() {
