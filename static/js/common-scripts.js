@@ -208,7 +208,7 @@ function editMember(e) {
 
     $(".member-"+id+"-row").each(function(){
         var text = $(this).text();
-        $(this).replaceWith("<td><input class='input-"+id+"' type='text' value='"+text+"'></td>");
+        $(this).replaceWith("<input class='input-"+id+"' type='text' value='"+text+"'>");
     });
 }
 
@@ -242,7 +242,8 @@ function submitMember(e) {
                console.log("updated");
                $(".input-"+id).each(function(){
                     var value = $(this).val();
-                    $(this).replaceWith(value);
+                    console.log(value);
+                    $(this).replaceWith("<span class='member-"+id+"-row'>"+value+"</span>");
                });
             },
 

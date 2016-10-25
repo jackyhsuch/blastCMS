@@ -23,10 +23,10 @@
                         {% for user in user_list %}
                             <tr id="member-{{ user.id }}">
                                 <td>{{ user.id }}</td>
-                                <td class="member-{{ user.id }}-row">{{ user.name }}</td>
-                                <td class="member-{{ user.id }}-row">{{ user.email }}</td>
-                                <td class="member-{{ user.id }}-row">{{ user.contact }}</td>
-                                <td class="member-{{ user.id }}-row">{{ user.matric_number }}</td>
+                                <td><span class="member-{{ user.id }}-row">{{ user.name }}</span></td>
+                                <td><span class="member-{{ user.id }}-row">{{ user.email }}</span></td>
+                                <td><span class="member-{{ user.id }}-row">{{ user.contact }}</span></td>
+                                <td><span class="member-{{ user.id }}-row">{{ user.matric_number }}</span></td>
                                 <td>
                                     <button class="btn btn-success btn-xs" data-id="{{ user.id }}" onclick="submitMember(this);"><i class="fa fa-check"></i></button>
                                     <button class="btn btn-primary btn-xs" data-id="{{ user.id }}" onclick="editMember(this);"><i class="fa fa-pencil"></i></button>
