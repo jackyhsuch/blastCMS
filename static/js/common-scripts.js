@@ -242,7 +242,6 @@ function submitMember(e) {
                console.log("updated");
                $(".input-"+id).each(function(){
                     var value = $(this).val();
-                    console.log(value);
                     $(this).replaceWith("<span class='member-"+id+"-row'>"+value+"</span>");
                });
             },
