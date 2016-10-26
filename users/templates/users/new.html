@@ -3,14 +3,48 @@
 {% block title %}New Member{% endblock %}
 
 {% block content %}
-    <h1>Add New Member</h1>
+    {% if success_message %}
+    <div class="row">
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Success!</strong> {{ success_message }}
+        </div> 
+    </div>
+    {% endif %}
 
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    {% if success_message %}<p><strong>{{ success_message }}</strong></p>{% endif %}
+    <div class="row success-message" style="display: none;">
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Success!</strong> New members added.
+        </div> 
+    </div>
 
-    <form action="{% url 'users:new' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Add" />
-    </form>
+    <div class="row mt">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="showback">
+                <h1>Add New Member</h1>
+                <form action="{% url 'users:new' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="btn btn-theme" type="submit" value="Add" />
+                </form>
+            </div>
+
+            <div class="showback">
+                <h1>Upload Members</h1>
+
+                <h4>How to upload?</h4>
+
+                <p>First row <u>must</u> and <u>only</u> has the headings:</p>
+                <p>
+                    <strong>name</strong>, 
+                    <strong>email</strong>,
+                    <strong>contact</strong> and 
+                    <strong>matric_number</strong>
+                </p>
+
+                <button type="button" class="btn btn-theme" onclick="uploadMember(this);"><i class="fa fa-upload"></i> Upload file</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

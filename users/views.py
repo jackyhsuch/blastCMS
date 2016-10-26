@@ -49,6 +49,55 @@ def new(request):
 
     return render(request, 'users/new.html', context)
 
+
+# upload members using excel sheets
+def upload(request):
+    filePath = get_askopenfilename_path()
+    wb = openpyxl.load_workbook(filename=filePath)
+    ws = wb[wb.get_sheet_names()[0]]
+
+    
+    # fill up table headings
+    headings = []
+    colCount = 1
+    while ws.cell(row=1, column=colCount).value is not None:
+        heading = ws.cell(row=1, column=colCount).value
+        headings.append(heading.lower())
+        colCount += 1
+
+
+    # add new users row by row into database
+    userDict = {}
+    rowCount = 2
+    colCount = 1
+    while ws.cell(row=rowCount, column=1).value is not None:
+        while ws.cell(row=rowCount, column=colCount).value is not None:
+            value = ws.cell(row=rowCount, column=colCount).value
+            userDict[headings[colCount-1]] = value
+
+            colCount += 1
+        else:
+            colCount = 1
+            rowCount += 1
+
+            existedUser = Users.objects.filter(matric_number=userDict['matric_number'])
+
+            if existedUser.count() > 0:
+                userDict['updated_at'] = datetime.now(pytz.timezone('Asia/Singapore'))
+                existedUser.update(**userDict)
+            else:
+                newUser = Users(**userDict)
+                newUser.save()
+
+            userDict.clear()
+
+
+    return HttpResponse(
+                json.dumps({"uploaded": True}),
+                content_type="application/json"
+            )
+
+
 # update user
 def update(request):
     if request.method == 'POST':
@@ -133,7 +182,7 @@ def download(request):
             delete_column(ws, col+2-count)
 
         # get file path and save
-        file_path = get_file_path()
+        file_path = get_saveasfilename_path()
 
         if not file_path:
             return HttpResponse(
@@ -161,7 +210,7 @@ def delete_column(ws, delete_column):
                     ws.cell(row=row, column=column+1).value
 
 
-def get_file_path():
+def get_saveasfilename_path():
     root = tkinter.Tk()
     root.attributes('-topmost', True)
     root.withdraw()
@@ -171,6 +220,20 @@ def get_file_path():
     options['initialfile'] = 'members.xlsx'
 
     file_path = tkinter.filedialog.asksaveasfilename(**options)
+
+    root.destroy()
+
+    return file_path
+
+
+def get_askopenfilename_path():
+    root = tkinter.Tk()
+    root.attributes('-topmost', True)
+    root.withdraw()
+
+    options = {}
+
+    file_path = tkinter.filedialog.askopenfilename(**options)
 
     root.destroy()
 
