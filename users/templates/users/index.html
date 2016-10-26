@@ -14,7 +14,7 @@
                       <th><i class="fa fa-user"></i> Name</th>
                       <th><i class="fa fa-envelope"></i> Email</th>
                       <th><i class="fa fa-phone"></i> Contact</th>
-                      <th><i class=" fa fa-edit"></i> Matric Number</th>
+                      <th><i class="fa fa-edit"></i> Matric Number</th>
                       <th></th>
                   </tr>
                 </thead>
@@ -28,8 +28,9 @@
                                 <td><span class="member-{{ user.id }}-row">{{ user.contact }}</span></td>
                                 <td><span class="member-{{ user.id }}-row">{{ user.matric_number }}</span></td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" data-id="{{ user.id }}" onclick="submitMember(this);"><i class="fa fa-check"></i></button>
-                                    <button class="btn btn-primary btn-xs" data-id="{{ user.id }}" onclick="editMember(this);"><i class="fa fa-pencil"></i></button>
+                                    <a href="{{ user.id }}"><button class="btn btn-warning btn-xs"><i class="fa fa-user"></i></button></a>
+                                    <button id="checkbutton-{{ user.id }}" class="btn btn-success btn-xs" data-id="{{ user.id }}" onclick="submitMember(this);" style="display: none;"><i class="fa fa-check"></i></button>
+                                    <button id="pencilbutton-{{ user.id }}" class="btn btn-primary btn-xs" data-id="{{ user.id }}" onclick="editMember(this);" ><i class="fa fa-pencil"></i></button>
                                     <button class="btn btn-danger btn-xs" data-id="{{ user.id }}" onclick="deleteMember(this);"><i class="fa fa-trash-o "></i></button>
                                 </td>
                             </tr>
