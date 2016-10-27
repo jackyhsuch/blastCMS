@@ -19,6 +19,7 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^users/', include('users.urls')),
+    url(r'^attendance/', include('attendance.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
