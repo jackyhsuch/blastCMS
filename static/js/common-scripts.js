@@ -244,7 +244,6 @@ function submitMember(e) {
                console.log("updated");
                $(".input-"+id).each(function(){
                     var value = $(this).val();
-                    console.log(value);
                     $(this).replaceWith("<span class='member-"+id+"-row'>"+value+"</span>");
                });
             },
@@ -256,6 +255,7 @@ function submitMember(e) {
         });
 }
 
+<<<<<<< HEAD
 function addAttendanceSlot(e){
 
     
@@ -268,3 +268,30 @@ function addAttendanceSlot(e){
 function submitAttendance(e){
 
 }
+=======
+function uploadMember(e) {
+    $.ajax({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            url: '/users/upload/',
+            type: 'POST',
+            data: {},
+            dataType: 'json',
+
+            // handle a successful response
+            success : function(json) {
+               console.log("uploaded");
+               $(".success-message").show();
+            },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+}
+
+>>>>>>> af66bde47ba415b37cdaa50d38ae1e0e69e61a2f

@@ -16,6 +16,11 @@ urlpatterns = [
     url(r'^delete/$', views.delete, name='delete'),
     # /users/download/
     url(r'^download/$', views.download, name='download'),
+<<<<<<< HEAD
     # /users/attendance/
     url(r'^attendance/$', views.attendance, name='attendance'),
+=======
+    # /users/upload/
+    url(r'^upload/$', views.upload, name='upload'),
+>>>>>>> af66bde47ba415b37cdaa50d38ae1e0e69e61a2f
 ]
