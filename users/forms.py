@@ -5,3 +5,5 @@ class NewUserForm(forms.Form):
     email = forms.CharField(label='Email Address', max_length=200)
     contact = forms.CharField(label='Contact Number',max_length=100)
     matric_number = forms.CharField(label= 'Matriculation Number',max_length=200)
+
+ 

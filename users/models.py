@@ -10,7 +10,20 @@ class Users(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Events(models.Model):
+    name = models.CharField(max_length=200)
+    date =  models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+
+class Attendances(models.Model):
+    Event_id = models.CharField(max_length=200)
+    User_id = models.CharField(max_length=200)
+    Status = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+  
 
     def __str__(self):
         sb = []

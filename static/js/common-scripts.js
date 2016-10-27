@@ -256,3 +256,15 @@ function submitMember(e) {
         });
 }
 
+function addAttendanceSlot(e){
+
+    
+    $("#addslotbutton").click(function(){
+     
+    });
+    
+}
+
+function submitAttendance(e){
+
+}

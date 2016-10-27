@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
-from .models import Users
+from .models import Users, Events, Attendances
 from .forms import NewUserForm
 
 from datetime import datetime
@@ -148,6 +148,16 @@ def download(request):
                 )
     else:
         return render(request, 'users/download.html')
+
+
+def attendance(request):
+    
+    user_list = Users.objects.order_by('id')
+    context = {
+        'user_list': user_list,
+    }
+    return render(request, 'users/attendance.html', context)
+       
 
 
 def delete_column(ws, delete_column):
