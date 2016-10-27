@@ -255,7 +255,7 @@ function submitMember(e) {
         });
 }
 
-<<<<<<< HEAD
+
 function addAttendanceSlot(e){
 
     
@@ -268,7 +268,7 @@ function addAttendanceSlot(e){
 function submitAttendance(e){
 
 }
-=======
+
 function uploadMember(e) {
     $.ajax({
             beforeSend: function(xhr, settings) {
@@ -293,5 +293,3 @@ function uploadMember(e) {
             }
         });
 }
-
->>>>>>> af66bde47ba415b37cdaa50d38ae1e0e69e61a2f
