@@ -1,3 +1,7 @@
-.attendance-button {
-    opacity: 0.5 !important; 
+.attendance-btn-inactive {
+    opacity: 0.2 !important; 
+}
+
+.attendance-btn-active {
+    opacity: 1 !important; 
 }

@@ -281,9 +281,65 @@ function uploadMember(e) {
 }
 
 // attendances
+var statusList = {}
+function attendanceBtn(e) {
+    var type = $(e).data("type");
+    var id = $(e).data("id");
+    var name = $(e).data("name");
 
-$('.attendance-button').click(function(e) {
-    console.log("clicked");
-    // e.preventDefault();
-    // $(this).addClass('active');
-})
+
+    switch(type) {
+        case "present":
+            toggle_attendance_btn(e, type, name);
+            inactivate_attendance_btn('absent', id);
+            inactivate_attendance_btn('excused', id);
+            break;
+
+        case "absent":
+            toggle_attendance_btn(e, type, name);
+            inactivate_attendance_btn('present', id);
+            inactivate_attendance_btn('excused', id);
+            break;
+
+        case "excused":
+            toggle_attendance_btn(e, type, name);
+            inactivate_attendance_btn('absent', id);
+            inactivate_attendance_btn('present', id);
+            break;
+
+        default:
+            break;
+    }
+
+    console.log(statusList);
+
+}
+
+function toggle_attendance_btn(e, type, name) {
+    if ($(e).hasClass('attendance-btn-inactive')) {
+        statusList[name] = type;
+        $(e).removeClass('attendance-btn-inactive');
+        $(e).addClass('attendance-btn-active');
+    } else {
+        delete statusList[name];
+        $(e).addClass('attendance-btn-inactive');
+        $(e).removeClass('attendance-btn-active');
+    }
+}
+
+function inactivate_attendance_btn(type, id) {
+    if (type === 'present') {
+        $('.attendance-btn-present-' + id).removeClass('attendance-btn-active');
+        $('.attendance-btn-present-' + id).addClass('attendance-btn-inactive');
+    }
+
+    if (type === 'absent') {
+        $('.attendance-btn-absent-' + id).removeClass('attendance-btn-active');
+        $('.attendance-btn-absent-' + id).addClass('attendance-btn-inactive');
+    }
+
+    if (type === 'excused') {
+        $('.attendance-btn-excused-' + id).removeClass('attendance-btn-active');
+        $('.attendance-btn-excused-' + id).addClass('attendance-btn-inactive');
+    }
+}

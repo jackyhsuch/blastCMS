@@ -28,9 +28,9 @@
                         <td>{{ user.name }}</a></td>
                         <td>{{ user.matric_number }}</td>
                         <td>
-                            <span class="btn btn-success btn-xs attendance-button">Present</span>
-                            <span class="btn btn-warning btn-xs attendance-button">Absent</span>
-                            <span class="btn btn-info btn-xs attendance-button">Excused</span>
+                            <span class="btn btn-success btn-xs attendance-btn-present-{{ user.id }} attendance-btn-inactive" data-id="{{ user.id }}" data-type="present" data-name="{{ user.name }}" onclick="attendanceBtn(this);">Present</span>
+                            <span class="btn btn-warning btn-xs attendance-btn-absent-{{ user.id }} attendance-btn-inactive" data-id="{{ user.id }}" data-type="absent" data-name="{{ user.name }}" onclick="attendanceBtn(this);">Absent</span>
+                            <span class="btn btn-info btn-xs attendance-btn-excused-{{ user.id }} attendance-btn-inactive" data-type="excused" data-id="{{ user.id }}" data-name="{{ user.name }}" onclick="attendanceBtn(this);">Excused</span>
                         </td>
                     </tr>
                     {% endfor %}
