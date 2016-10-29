@@ -59,7 +59,19 @@ def new(request):
 
 # show each event details with name list
 def show(request, event_id):
+    context = {}
+
     event = get_object_or_404(Events, pk=event_id)
-    context = {'event': event}
+    context['event'] = event
+
+    attendanceObjects = Attendances.objects.filter(event_id=event.id)
+
+    users = []
+    for attendanceObject in attendanceObjects:
+        # print(Users.objects.get(pk=attendanceObject.user_id))
+        users.append(Users.objects.get(pk=attendanceObject.user_id))
+
+    context['user_list'] = users
+
 
     return render(request, 'attendance/show.html', context)

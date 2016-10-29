@@ -280,3 +280,10 @@ function uploadMember(e) {
         });
 }
 
+// attendances
+
+$('.attendance-button').click(function(e) {
+    console.log("clicked");
+    // e.preventDefault();
+    // $(this).addClass('active');
+})

@@ -4,8 +4,10 @@ from . import views
 
 app_name = 'attendance'
 urlpatterns = [
-    # /users/
+    # /attendance/
     url(r'^$', views.index, name='index'),
-    # /users/new/
+    # /attendance/new/
     url(r'^new/$', views.new, name='new'),
+    # /attendance/3/
+    url(r'^(?P<event_id>[0-9]+)/$', views.show, name='show'),
 ]
