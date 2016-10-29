@@ -293,3 +293,14 @@ function uploadMember(e) {
             }
         });
 }
+<<<<<<< HEAD
+=======
+
+// attendances
+
+$('.attendance-button').click(function(e) {
+    console.log("clicked");
+    // e.preventDefault();
+    // $(this).addClass('active');
+})
+>>>>>>> 1dff2bd5ac8a4d82ccd3d750cbbe69580d069dba

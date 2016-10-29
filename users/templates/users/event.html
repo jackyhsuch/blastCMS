@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Event{% endblock %}
+
+{% block content %}
+	
+<div class="row mt">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="showback">
+                <h1>Attendance</h1>
+                <form action="{% url 'users:attendance' %}" method="post">
+                	{% csrf_token %}
+                    <a>{{ form.name }}</a>
+                    <br>
+                    <a>{{ form.date }}</a>
+                    <br>   
+                    <input onclick="location.href = /users/attendance.html" type="submit" value="Enter" class="btn btn-primary btn-sm"/>
+                </form>
+            </div>
+        </div>
+</div>     
+
+  
+{% endblock %}

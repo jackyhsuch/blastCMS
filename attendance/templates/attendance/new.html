@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}New Event{% endblock %}
+
+{% block content %}
+
+<div class="col-md-6">
+    <h1>Add Event</h1> 
+</div>
+<div class="row mt">
+    {% if years_is_selected %}
+    <div class="col-md-12">
+        <div class="">
+            <h4 class="mb">Event Details</h4>
+            <form class="form-horizontal style-form" method="get">
+                <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                      <label class="col-sm-2 col-sm-2 control-label">Date</label>
+                      <div class="col-sm-10">
+                          <input type="date" class="form-control" placeholder="DD/MM/YYYY">
+                      </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="col-md-12">
+        <div class="content-panel">
+            <table class="table table-striped table-advance table-hover">
+                <h4>Name List</h4>   
+                <hr>
+                <thead>
+                  <tr>
+                      <th><i></i>ID</th>
+                      <th><i class="fa fa-user"></i> Name</th>
+                      <th><i class="fa fa-lightbulb-o"></i> Status</th>
+                      <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if user_list %}
+                        {% for user in user_list %}
+                            <tr id="member-{{ user.id }}">
+                                <td>{{ user.id }}</td>
+                                <td><span class="member-{{ user.id }}-row">{{ user.name }}</span></td>
+                                <form>
+                                    <td>
+                                        <select class="member-{{ user.id }}-status">
+                                            <option class= "member-{{ user.id }}-present"></option>
+                                            <option class= "member-{{ user.id }}-present">PRESENT</option>
+                                            <option class= "member-{{ user.id }}-absent">ABSENT</option>
+                                            <option class= "member-{{ user.id }}-invited">EXCUSED</option>
+                                        </select>
+                                    </td>
+                                </form>    
+                            </tr>    
+                        {% endfor %}
+                    {% endif %}              
+                </tbody> 
+
+            </table>
+             
+            <a id="addslotbutton" class="btn btn-primary btn-sm pull-left" onclick="addAttendanceSlot(this);">Add Members</a>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-12 form-horizontal style-form">
+        <form action="{% url 'attendance:new' %}" method="post">
+            {% csrf_token %}
+            <h4 class="mb">Event Details</h4>
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="name" maxlength="100" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Date</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" name="date" placeholder="DD/MM/YYYY" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Choose Years</label>
+                <div class="col-sm-10">
+                    <label class="checkbox-inline">
+                    <input type="checkbox" name="years" id="inlineCheckbox1" value="0"> 1
+                    </label>
+                    <label class="checkbox-inline">
+                    <input type="checkbox" name="years" id="inlineCheckbox2" value="1"> 2
+                    </label>
+                    <label class="checkbox-inline">
+                    <input type="checkbox" name="years" id="inlineCheckbox3" value="2"> 3
+                    </label>
+                    <label class="checkbox-inline">
+                    <input type="checkbox" name="years" id="inlineCheckbox3" value="3"> 4
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input class="btn btn-theme btn-sm" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
