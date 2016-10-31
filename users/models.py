@@ -13,7 +13,6 @@ class Users(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-<<<<<<< HEAD
 class Events(models.Model):
     name = models.CharField(max_length=200)
     date =  models.CharField(max_length=200)
@@ -28,9 +27,6 @@ class Attendances(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
   
-
-=======
->>>>>>> 1dff2bd5ac8a4d82ccd3d750cbbe69580d069dba
     def __str__(self):
         sb = []
 

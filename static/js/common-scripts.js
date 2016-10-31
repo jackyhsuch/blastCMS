@@ -256,18 +256,6 @@ function submitMember(e) {
 }
 
 
-function addAttendanceSlot(e){
-
-    
-    $("#addslotbutton").click(function(){
-     
-    });
-    
-}
-
-function submitAttendance(e){
-
-}
 
 function uploadMember(e) {
     $.ajax({
@@ -293,8 +281,7 @@ function uploadMember(e) {
             }
         });
 }
-<<<<<<< HEAD
-=======
+
 
 // attendances
 
@@ -303,4 +290,4 @@ $('.attendance-button').click(function(e) {
     // e.preventDefault();
     // $(this).addClass('active');
 })
->>>>>>> 1dff2bd5ac8a4d82ccd3d750cbbe69580d069dba
+

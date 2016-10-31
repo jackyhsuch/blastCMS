@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Add Member To Attendance{% endblock %}
+
+{% block content %}
+	
+
+<div class="row mt">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="task-panel">
+                <h1>Add Member To List</h1>
+	                <form action="{% url 'users:add_attendance_member' %}" method="post">
+	                    {% csrf_token %}
+	                    <h5>Name:</h5>
+	                    {{ form.name }}
+	                    <br>
+	                    <h5>Status:</h5>
+	                    {{ form.status }}
+	                    <Input type= "Submit" class="btn btn-success btn-sm pull-left" value="Enter"></input> 
+	                    <Input type= "button" class="btn btn-primary btn-sm pull-right" value="Return To List" onclick="location.href ='/users/attendance/'"></input> 
+	                </form>
+            </div>
+        </div>    
+</div>
+
+
+  
+
+
+{% endblock %}

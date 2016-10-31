@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^attendance/$', views.attendance, name='attendance'),
     # /users/upload/
     url(r'^upload/$', views.upload, name='upload'),
+    # /users/addattendancemember/
+    url(r'add_attendance_member/$', views.add_attendance_member, name='add_attendance_member'),
 ]
