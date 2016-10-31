@@ -290,19 +290,19 @@ function attendanceBtn(e) {
 
     switch(type) {
         case "present":
-            toggle_attendance_btn(e, type, name);
+            toggle_attendance_btn(e, type, id);
             inactivate_attendance_btn('absent', id);
             inactivate_attendance_btn('excused', id);
             break;
 
         case "absent":
-            toggle_attendance_btn(e, type, name);
+            toggle_attendance_btn(e, type, id);
             inactivate_attendance_btn('present', id);
             inactivate_attendance_btn('excused', id);
             break;
 
         case "excused":
-            toggle_attendance_btn(e, type, name);
+            toggle_attendance_btn(e, type, id);
             inactivate_attendance_btn('absent', id);
             inactivate_attendance_btn('present', id);
             break;
@@ -311,19 +311,17 @@ function attendanceBtn(e) {
             break;
     }
 
-    console.log(statusList);
+    
 
 }
 
-function toggle_attendance_btn(e, type, name) {
+function toggle_attendance_btn(e, type, id) {
     if ($(e).hasClass('attendance-btn-inactive')) {
-        statusList[name] = type;
+        statusList[id] = type;
         $(e).removeClass('attendance-btn-inactive');
-        $(e).addClass('attendance-btn-active');
     } else {
-        delete statusList[name];
+        delete statusList[id];
         $(e).addClass('attendance-btn-inactive');
-        $(e).removeClass('attendance-btn-active');
     }
 }
 
@@ -342,4 +340,30 @@ function inactivate_attendance_btn(type, id) {
         $('.attendance-btn-excused-' + id).removeClass('attendance-btn-active');
         $('.attendance-btn-excused-' + id).addClass('attendance-btn-inactive');
     }
+}
+
+function submitAttendance(e) {
+    statusList['event_id'] = $(e).data("id");
+
+    $.ajax({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            url: '/attendance/submit/',
+            type: 'POST',
+            data: statusList,
+            dataType: 'json',
+
+            // handle a successful response
+            success : function() {
+               console.log("submitted");
+            },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
 }

@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^new/$', views.new, name='new'),
     # /attendance/3/
     url(r'^(?P<event_id>[0-9]+)/$', views.show, name='show'),
+    # /attendance/submit/
+    url(r'^submit/$', views.submit, name='submit'),
 ]
