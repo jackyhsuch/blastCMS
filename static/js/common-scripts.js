@@ -287,7 +287,6 @@ function attendanceBtn(e) {
     var id = $(e).data("id");
     var name = $(e).data("name");
 
-
     switch(type) {
         case "present":
             toggle_attendance_btn(e, type, id);
@@ -359,6 +358,7 @@ function submitAttendance(e) {
             // handle a successful response
             success : function() {
                console.log("submitted");
+               $(".success-message").show();
             },
 
             // handle a non-successful response
@@ -367,3 +367,7 @@ function submitAttendance(e) {
             }
         });
 }
+
+$("[data-hide]").on("click", function(){
+    $(".success-message").hide();
+});
