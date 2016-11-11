@@ -326,17 +326,14 @@ function toggle_attendance_btn(e, type, id) {
 
 function inactivate_attendance_btn(type, id) {
     if (type === 'present') {
-        $('.attendance-btn-present-' + id).removeClass('attendance-btn-active');
         $('.attendance-btn-present-' + id).addClass('attendance-btn-inactive');
     }
 
     if (type === 'absent') {
-        $('.attendance-btn-absent-' + id).removeClass('attendance-btn-active');
         $('.attendance-btn-absent-' + id).addClass('attendance-btn-inactive');
     }
 
     if (type === 'excused') {
-        $('.attendance-btn-excused-' + id).removeClass('attendance-btn-active');
         $('.attendance-btn-excused-' + id).addClass('attendance-btn-inactive');
     }
 }
